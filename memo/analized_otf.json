@@ -1,0 +1,54 @@
+{
+    "f_.TAU": {
+        "start": 50,
+        "f_main": {
+            "start": 100,
+            "f_calc": {
+                "start": 101,
+                "end": 155,
+                "diff": 54
+            },
+            "end": 158,
+            "diff": 58
+        },
+        "end": 159,
+        "diff": 109
+    },
+    "or": [
+        {
+            "name": ".TAU",
+            "start": 50,
+            "end": 159,
+            "diff": 109,
+            "callStack": 0
+        },
+        {
+            "name": "main",
+            "start": 100,
+            "end": 158,
+            "diff": 58,
+            "callStack": 1
+        },
+        {
+            "name": "calc",
+            "start": 101,
+            "end": 155,
+            "diff": 54,
+            "callStack": 2
+        },
+        {
+            "name": "calc",
+            "start": 102,
+            "end": 103,
+            "diff": 1,
+            "callStack": 3, "//": "再帰"
+        },
+        {
+            "name": "calc",
+            "start": 104,
+            "end": 105,
+            "diff": 1,
+            "callStack": 2, "//": "通常"
+        }
+    ]
+}
