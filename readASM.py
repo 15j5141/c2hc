@@ -69,4 +69,5 @@ class ReadASM:
 reader = ReadASM()
 reader.load()
 result = reader.parse()
+reader.save(result)
 print(result)
