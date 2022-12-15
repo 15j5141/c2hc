@@ -36,8 +36,9 @@ class SArray2Vec:
         print(self.mnemonic_section_list)
         OneHot.set_params(categories=[self.mnemonic_section_list])
         vector = OneHot.fit_transform(pd.DataFrame(self.lines))
-        print(vector)
-        return vector
+        vector2 = np.sum(vector, axis=0)
+        print(vector2)
+        return vector2
 
     def save(self, results):
         with open("out\\results_onehot.json", "w") as f:
