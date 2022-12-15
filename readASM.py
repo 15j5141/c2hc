@@ -7,14 +7,14 @@ print("abs dirname: ", current_dir)
 
 class ReadASM:
     def __init__(self):
-        self.path_mnemonic = "memo\\mnemonic.json"
-        self.path_section = "memo\\section.json"
+        self.path_mnemonic = "src\\mnemonic.json"
+        self.path_section = "src\\section.json"
 
     def load(self, filename=None):
         self.lines = []
         current_dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
         if filename is None:
-            path = current_dir + "memo\\main.s"
+            path = current_dir + "in\\main.s"
         else:
             path = filename
         with open(self.path_mnemonic, "r") as pt:
@@ -63,7 +63,7 @@ class ReadASM:
         return results
 
     def save(self, results):
-        with open("memo\\results.json", "w") as f:
+        with open("out\\results.json", "w") as f:
             json.dump(results, f, indent=4)
 
 reader = ReadASM()
