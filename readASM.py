@@ -13,10 +13,7 @@ class ReadASM:
     def load(self, filename=None):
         self.lines = []
         current_dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
-        if filename is None:
-            path = current_dir + "in\\main.s"
-        else:
-            path = filename
+        path = (current_dir + "in\\main.s") if filename is None else filename
         with open(self.path_mnemonic, "r") as pt:
             json_mnemonic = json.load(pt)
         with open(self.path_section, "r") as pt:
