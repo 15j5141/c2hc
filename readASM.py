@@ -2,8 +2,6 @@ import os
 import json
 import re
 
-current_dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
-print("abs dirname: ", current_dir)
 
 class ReadASM:
     def __init__(self):
@@ -22,6 +20,7 @@ class ReadASM:
         with open(path) as f:
             for s_line in f:
                 self.lines.append(s_line)
+
     def parse(self):
         matcher_label = re.compile("[a-zA-Z0-9.]+:")
         matcher_nolabel = re.compile("\s+[a-zA-Z0-9.]+")
@@ -40,7 +39,9 @@ class ReadASM:
                 # checked = [x for x in json_mnemonic if matcher_mnemonic_func(x).match(s_line)]
                 # checked2 = [x for x in json_section if matcher_mnemonic_func(x).match(s_line)]
                 checked0 = [
-                    x for x in self.mnemonic_section_list if matcher_mnemonic_func(x).match(s_line)
+                    x
+                    for x in self.mnemonic_section_list
+                    if matcher_mnemonic_func(x).match(s_line)
                 ]
                 # 結果一覧に格納する.
                 if len(checked0) > 0:
@@ -63,8 +64,16 @@ class ReadASM:
         with open("out\\results.json", "w") as f:
             json.dump(results, f, indent=4)
 
-reader = ReadASM()
-reader.load()
-result = reader.parse()
-reader.save(result)
-print(result)
+
+def main():
+    current_dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
+    print("abs dirname: ", current_dir)
+    reader = ReadASM()
+    reader.load()
+    result = reader.parse()
+    reader.save(result)
+    print(result)
+
+
+if __name__ == "__main__":
+    main()
