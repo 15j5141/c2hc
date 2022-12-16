@@ -70,12 +70,13 @@ class Manager:
             my_env["COUNTER4"] = HCList[4 * i + 2]
             my_env["COUNTER5"] = HCList[4 * i + 3]
             self.called_build()
+        self.env=my_env
 
     def called_build(self, *args, **kwargs):
         process = subprocess.Popen(
             ["sh", "./called_build.sh"],
             stdout=subprocess.PIPE,
-            env=my_env,
+            env=self.env,
             encoding="utf-8",
         )
         # process = subprocess.Popen(["cmd", "/c", "echo", "%MSG%"], stdout=subprocess.PIPE, env=my_env, encoding="sjis")
