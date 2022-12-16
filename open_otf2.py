@@ -72,7 +72,7 @@ with otf2.reader.open("main.otf2.otf2") as trace:
 
                 # switch
                 if ptr_target["state"] == "Enter":
-                    _obj = {"name": event_name, "start": value, "end": -1}
+                    _obj = {"name": event_name, "start": value, "end": -1, "diff": -1}
                     ptr_target["events"].append(_obj)
                     print()
                 elif ptr_target["state"] == "Leave":
@@ -80,6 +80,7 @@ with otf2.reader.open("main.otf2.otf2") as trace:
                         filter(lambda v: v["name"] == event_name, ptr_target["events"])
                     )[0]
                     _targetEvent["end"] = value
+                    _targetEvent["diff"] = value - _targetEvent["start"]
                     # diff
                     print()
 
@@ -108,7 +109,7 @@ with otf2.reader.open("main.otf2.otf2") as trace:
             stack_done.append(ptr_target)  # とりあえず退避する. 可能ならもっとましな所で実行したいが...
             print("Leave {},{}".format(event.region, event.attributes))
 print(json.dumps(stack_done))
-with open("out\\hardwareCounter.json", "w") as f:
+with open("out/hardwareCounter.json", "w") as f:
     json.dump(stack_done, f, indent=2)
 print("")
 

@@ -1,0 +1,95 @@
+[
+  {
+    "name": "int calc(int) C",
+    "callStack": 0,
+    "events": [
+      {
+        "name": "PAPI_L3_TCR",
+        "start": 4579,
+        "end": 4617,
+        "diff": 38
+      },
+      {
+        "name": "PAPI_L2_TCW",
+        "start": 528,
+        "end": 544,
+        "diff": 16
+      },
+      {
+        "name": "PAPI_L3_TCW",
+        "start": 292,
+        "end": 295,
+        "diff": 3
+      },
+      {
+        "name": "PAPI_REF_CYC",
+        "start": 300142,
+        "end": 303552,
+        "diff": 3410
+      }
+    ],
+    "state": "Leave"
+  },
+  {
+    "name": "int main(void) C",
+    "callStack": 0,
+    "events": [
+      {
+        "name": "PAPI_L3_TCR",
+        "start": 4565,
+        "end": 4850,
+        "diff": 285
+      },
+      {
+        "name": "PAPI_L2_TCW",
+        "start": 516,
+        "end": 552,
+        "diff": 36
+      },
+      {
+        "name": "PAPI_L3_TCW",
+        "start": 287,
+        "end": 298,
+        "diff": 11
+      },
+      {
+        "name": "PAPI_REF_CYC",
+        "start": 294221,
+        "end": 314247,
+        "diff": 20026
+      }
+    ],
+    "state": "Leave"
+  },
+  {
+    "name": ".TAU application ",
+    "callStack": 0,
+    "events": [
+      {
+        "name": "PAPI_L3_TCR",
+        "start": 4193,
+        "end": 0,
+        "diff": -4193
+      },
+      {
+        "name": "PAPI_L2_TCW",
+        "start": 486,
+        "end": 0,
+        "diff": -486
+      },
+      {
+        "name": "PAPI_L3_TCW",
+        "start": 269,
+        "end": 0,
+        "diff": -269
+      },
+      {
+        "name": "PAPI_REF_CYC",
+        "start": 274195,
+        "end": 0,
+        "diff": -274195
+      }
+    ],
+    "state": "Leave"
+  }
+]

@@ -2,8 +2,8 @@
 rm main.dump tautrace.0.0.0.trc events.0.edf a.out
 rm -r MULTI__*/
 
-read -p "run? (y/N): " yn
-case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
+# read -p "run? (y/N): " yn
+# case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
 
 export TAU_TRACE=1
 # export TAU_PROFILE=1

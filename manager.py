@@ -2,6 +2,8 @@ import subprocess, os
 
 
 class Manager:
+    def __init__(self) -> None:
+        pass
     def buildC(self, *args, **kwargs):
         HCList = [
             "PAPI_L1_DCM",
@@ -63,14 +65,14 @@ class Manager:
         ]
         i = 0
         my_env = os.environ.copy()
-        for i in range(len(HCList / 4)):
+        self.env=my_env
+        for i in range(len(HCList )// 4):
 
             my_env["COUNTER2"] = HCList[4 * i + 0]
             my_env["COUNTER3"] = HCList[4 * i + 1]
             my_env["COUNTER4"] = HCList[4 * i + 2]
             my_env["COUNTER5"] = HCList[4 * i + 3]
             self.called_build()
-        self.env=my_env
 
     def called_build(self, *args, **kwargs):
         process = subprocess.Popen(
@@ -84,3 +86,7 @@ class Manager:
 
         print(stdoutdata)
         print(process.returncode)
+
+if __name__ == "__main__":
+    manager = Manager()
+    manager.buildC()
