@@ -108,6 +108,8 @@ with otf2.reader.open("main.otf2.otf2") as trace:
             stack_done.append(ptr_target)  # とりあえず退避する. 可能ならもっとましな所で実行したいが...
             print("Leave {},{}".format(event.region, event.attributes))
 print(json.dumps(stack_done))
+with open("out\\hardwareCounter.json", "w") as f:
+    json.dump(stack_done, f, indent=2)
 print("")
 
 """
