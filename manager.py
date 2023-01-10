@@ -1,8 +1,12 @@
 import subprocess, os
+import json
+
 
 
 class Manager:
     def __init__(self) -> None:
+        with open("../records.json", "r") as f:
+            self.records:list = json.load(f)
         pass
     def buildC(self, *args, **kwargs):
         HCList = [
@@ -63,18 +67,26 @@ class Manager:
             "PAPI_L3_TCW",
             "PAPI_REF_CYC",
         ]
+        self._init_hardwareCounter_json()
         i = 0
         my_env = os.environ.copy()
         self.env=my_env
-        for i in range(len(HCList )// 4):
+        for j in range(len(self.records)):
+            my_env["COMPILE_FILE"] = "../Project_CodeNet/" + self.records[j]["c"]
+            my_env["INPUT_TEXT"] = self.records[j]["in"]
+            for i in range(len(HCList )// 4):
+                my_env["COUNTER2"] = HCList[4 * i + 0]
+                my_env["COUNTER3"] = HCList[4 * i + 1]
+                my_env["COUNTER4"] = HCList[4 * i + 2]
+                my_env["COUNTER5"] = HCList[4 * i + 3]
+                # my_env["COMPILE_FILE"] = "./main.c"
+                # my_env["INPUT_TEXT"] = "10"
+                print(my_env["COMPILE_FILE"]+":"+my_env["INPUT_TEXT"])
+                print(""+str(i)+"/"+str(len(HCList)//4)+","+str(j)+"/"+str(len(self.records)))
+                self._called_build()
 
-            my_env["COUNTER2"] = HCList[4 * i + 0]
-            my_env["COUNTER3"] = HCList[4 * i + 1]
-            my_env["COUNTER4"] = HCList[4 * i + 2]
-            my_env["COUNTER5"] = HCList[4 * i + 3]
-            self.called_build()
-
-    def called_build(self, *args, **kwargs):
+    def _called_build(self, *args, **kwargs):
+        """ called_build.sh(open_otf2.py)を呼ぶ. """
         process = subprocess.Popen(
             ["sh", "./called_build.sh"],
             stdout=subprocess.PIPE,
@@ -85,7 +97,13 @@ class Manager:
         stdoutdata, _ = process.communicate()
 
         print(stdoutdata)
-        print(process.returncode)
+        print("returncode:"+(str)(process.returncode))
+
+    def _init_hardwareCounter_json(self):
+        """ hardwareCounter.jsonを初期化する. """
+        with open("out/hardwareCounter.json", "w") as f:
+            json.dump([], f, indent=2)
+
 
 if __name__ == "__main__":
     manager = Manager()

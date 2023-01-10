@@ -8,16 +8,18 @@ rm -r MULTI__*/
 export TAU_TRACE=1
 # export TAU_PROFILE=1
 export COUNTER1=P_WALL_CLOCK_TIME
+# export COMPILE_FILE="./main.c"
+# export INPUT_TEXT="10"
 
 # before exec python
-mkdir dst
-mkdir dst/img
+mkdir -p dst
+mkdir -p dst/img
 
 build()
 {
-    gcc main.c -S
-    taucc main.c -tau:pdtinst -tau:serial,papi,pdt
-    echo "10" | ./a.out
+    gcc $COMPILE_FILE -S -o ./main.s
+    taucc $COMPILE_FILE -tau:pdtinst -tau:serial,papi,pdt -o ./a.out
+    echo -e "$INPUT_TEXT" | ./a.out
 
     # read -p "plz Enter: "
 

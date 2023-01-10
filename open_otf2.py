@@ -38,29 +38,12 @@ def countFunc(arr: tuple, funcName: str) -> None:
     filter(lambda v: v["name"] == funcName, arr)
 
 
-print(type(otf2))
 with otf2.reader.open("main.otf2.otf2") as trace:
     # trace.definitions._set_clock_properties()
-    print("Read {} string definitions".format(len(trace.definitions.strings)))
-    print((trace.definitions.strings[1]))
+    # print("Read {} string definitions".format(len(trace.definitions.strings)))
+    # print((trace.definitions.strings[1]))
 
     for location, event in trace.events:
-        print(
-            event.time,
-            type(event).__name__,
-            (
-                (
-                    event.metric.members[0].name
-                    + ":"
-                    + str(event.values[0])
-                    + ":"
-                    + str(len(event.values))
-                )
-                if (type(event).__name__ == "Metric")
-                else "none"
-            ),
-            sep=",",
-        )
         if type(event).__name__ == "Metric":
             if ptr_target is None:
                 break
@@ -74,7 +57,6 @@ with otf2.reader.open("main.otf2.otf2") as trace:
                 if ptr_target["state"] == "Enter":
                     _obj = {"name": event_name, "start": value, "end": -1, "diff": -1}
                     ptr_target["events"].append(_obj)
-                    print()
                 elif ptr_target["state"] == "Leave":
                     _targetEvent = list(
                         filter(lambda v: v["name"] == event_name, ptr_target["events"])
@@ -82,7 +64,6 @@ with otf2.reader.open("main.otf2.otf2") as trace:
                     _targetEvent["end"] = value
                     _targetEvent["diff"] = value - _targetEvent["start"]
                     # diff
-                    print()
 
                 # print("[E={:^15}] time={:0=10}, value={:06}, delta={:0=+7}".format(
                 #     event_name,
@@ -99,7 +80,7 @@ with otf2.reader.open("main.otf2.otf2") as trace:
                 "state": "Enter",
             }
             stack[_func_name].append(ptr_target)
-            print("Enter {},{}".format(event.region, event.attributes))
+            # print("Enter {},{}".format(event.region, event.attributes))
         elif type(event).__name__ == "Leave":
             _func_name = event.region.canonical_name
             #  stack[_func_name][-1]
@@ -107,11 +88,11 @@ with otf2.reader.open("main.otf2.otf2") as trace:
             ptr_target = stack[_func_name].pop()
             ptr_target["state"] = "Leave"
             stack_done.append(ptr_target)  # とりあえず退避する. 可能ならもっとましな所で実行したいが...
-            print("Leave {},{}".format(event.region, event.attributes))
-print(json.dumps(stack_done))
+            # print("Leave {},{}".format(event.region, event.attributes))
+# print(json.dumps(stack_done))
 with open("out/hardwareCounter.json", "w") as f:
     json.dump(stack_done, f, indent=2)
-print("")
+print("done: open_otf2")
 
 """
 .TAU A 100
