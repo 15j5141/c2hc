@@ -9,6 +9,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 import json
+import csv
 
 stack = {
     "_main": [
@@ -92,7 +93,14 @@ with otf2.reader.open("main.otf2.otf2") as trace:
 # print(json.dumps(stack_done))
 with open("out/hardwareCounter.json", "w") as f:
     json.dump(stack_done, f, indent=2)
+
+row = [x["diff"] for x in stack_done[0]["events"] ]
+# row = [x["diff"] for x in stack_done[len(stack_done)-2]["events"] ]
 print("done: open_otf2")
+
+with open('out/hc_append.csv', 'a') as f:
+    writer = csv.writer(f)
+    writer.writerow(row)
 
 """
 .TAU A 100

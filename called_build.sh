@@ -1,6 +1,7 @@
 #
 rm main.dump tautrace.0.0.0.trc events.0.edf a.out
 rm -r MULTI__*/
+# rm *.o
 
 # read -p "run? (y/N): " yn
 # case "$yn" in [yY]*) ;; *) echo "abort." ; exit ;; esac
@@ -17,8 +18,9 @@ mkdir -p dst/img
 
 build()
 {
-    gcc $COMPILE_FILE -S -o ./main.s
-    taucc $COMPILE_FILE -tau:pdtinst -tau:serial,papi,pdt -o ./a.out
+    cp -f $COMPILE_FILE ./main.c
+    gcc main.c -S -o ./main.s
+    taucc main.c -tau:pdtinst -tau:serial,papi,pdt -tau:compinst -tau:headerinst -o ./a.out
     echo -e "$INPUT_TEXT" | ./a.out
 
     # read -p "plz Enter: "
@@ -29,6 +31,12 @@ build()
     # tau2profile ./tautrace.0.0.0.trc ./events.0.edf -d ./
 
     python open_otf2.py
+
+    cp ./main.s ./in/main.s
+    echo "start readASM.py"
+    python readASM.py
+    echo "start SArray2vec.py"
+    python SArray2vec.py
     #-ignoreatomic
     # tail -n 10 main.dump
 }

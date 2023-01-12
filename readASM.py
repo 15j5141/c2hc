@@ -5,13 +5,13 @@ import re
 
 class ReadASM:
     def __init__(self):
-        self.path_mnemonic = "src\\mnemonic.json"
-        self.path_section = "src\\section.json"
+        self.path_mnemonic = "src/mnemonic.json"
+        self.path_section = "src/section.json"
 
     def load(self, filename=None):
         self.lines = []
-        current_dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
-        path = (current_dir + "in\\main.s") if filename is None else filename
+        current_dir = os.path.dirname(os.path.abspath(__file__)) + "/"
+        path = (current_dir + "in/main.s") if filename is None else filename
         with open(self.path_mnemonic, "r") as pt:
             json_mnemonic = json.load(pt)
         with open(self.path_section, "r") as pt:
@@ -61,18 +61,18 @@ class ReadASM:
         return results
 
     def save(self, results):
-        with open("out\\results.json", "w") as f:
+        with open("out/results.json", "w") as f:
             json.dump(results, f, indent=4)
 
 
 def main():
-    current_dir = os.path.dirname(os.path.abspath(__file__)) + "\\"
+    current_dir = os.path.dirname(os.path.abspath(__file__)) + "/"
     print("abs dirname: ", current_dir)
     reader = ReadASM()
     reader.load()
     result = reader.parse()
     reader.save(result)
-    print(result)
+    # print(result)
 
 
 if __name__ == "__main__":

@@ -103,6 +103,10 @@ class Manager:
         """ hardwareCounter.jsonを初期化する. """
         with open("out/hardwareCounter.json", "w") as f:
             json.dump([], f, indent=2)
+        with open('out/hc_append.csv', 'w') as f:
+            f.write('')
+        with open('out/mc_append.csv', 'w') as f:
+            f.write('')
 
 
 if __name__ == "__main__":
