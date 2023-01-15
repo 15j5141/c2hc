@@ -32,7 +32,7 @@ class ReadASM:
             # print(s_line)
             if matcher_label.match(s_line):
                 # ラベルを固定値で結果一覧に格納する.
-                print("label" + s_line)
+                # print("label" + s_line)
                 results.append(str.upper("__LABEL__"))
             elif matcher_nolabel.match(s_line):
                 # filter
@@ -45,11 +45,11 @@ class ReadASM:
                 ]
                 # 結果一覧に格納する.
                 if len(checked0) > 0:
-                    print("mnemonic or section" + str(checked0))
+                    # print("mnemonic or section" + str(checked0))
                     results.append(str.upper(checked0[0]))
                     continue
                 else:
-                    print("other" + str(s_line))
+                    print("other" + str(s_line).replace("\n", ""))
                     continue
                 if len(checked) > 0:
                     print("mnemonic" + str((checked)))

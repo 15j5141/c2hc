@@ -2,6 +2,19 @@ node_modules
 package-lock.json
 
 dst/
-main.otf2/
 in/Project_CodeNet/
+__pycache__/
+
+main.otf2/
 records.json
+a.out
+events.0.edf
+main.c
+main.dump
+main.o
+main.otf2.def
+main.otf2.otf2
+main.s
+in/main.s
+tautrace.0.0.0.trc
+trace.json
