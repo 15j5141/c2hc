@@ -3,7 +3,7 @@ const fsSync = require('fs');
 const path = require('path');
 const { parse } = require('csv-parse');
 console.log(parse);
-const PATH_CODENET = './Project_CodeNet/';
+const PATH_CODENET = './in/Project_CodeNet/';
 const inputFiles = {}
 const inputFilesPerQuestion = {} // 1問1答でサンプルコードを用意する.
 class WaitFS {
