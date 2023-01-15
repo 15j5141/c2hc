@@ -19,7 +19,7 @@ mkdir -p dst/img
 build()
 {
     cp -f $COMPILE_FILE ./main.c
-    gcc main.c -S -o ./main.s
+    gcc main.c -S -fno-asynchronous-unwind-tables -o ./main.s
     taucc main.c -tau:pdtinst -tau:serial,papi,pdt -tau:compinst -tau:headerinst -o ./a.out
     echo -e "$INPUT_TEXT" | ./a.out
 
@@ -29,14 +29,7 @@ build()
     tau_trace2json ./tautrace.0.0.0.trc ./events.0.edf -chrome -ignoreatomic -o trace.json
     tau2otf2 ./tautrace.0.0.0.trc ./events.0.edf main.otf2
     # tau2profile ./tautrace.0.0.0.trc ./events.0.edf -d ./
-
-    python open_otf2.py
-
     cp ./main.s ./in/main.s
-    echo "start readASM.py"
-    python readASM.py
-    echo "start SArray2vec.py"
-    python SArray2vec.py
     #-ignoreatomic
     # tail -n 10 main.dump
 }
