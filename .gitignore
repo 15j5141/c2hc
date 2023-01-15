@@ -1,2 +1,7 @@
+node_modules
+package-lock.json
+
 dst/
 main.otf2/
+in/Project_CodeNet/
+records.json
