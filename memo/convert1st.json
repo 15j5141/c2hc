@@ -1,0 +1,32 @@
+[
+    "//1",
+    [
+        {
+            "name": "main",
+            "events": [
+                {
+                    "name": "PAPI_L3_LDM",
+                    "start": 50,
+                    "end": 159,
+                    "diff": 109
+                }
+            ],
+            "callStack": 0
+        }
+    ],
+    "//2",
+    [
+        {
+            "name": "main",
+            "events": [
+                {
+                    "name": "PAPI_L1_LDM",
+                    "start": 50,
+                    "end": 159,
+                    "diff": 109
+                }
+            ],
+            "callStack": 0
+        }
+    ]
+]

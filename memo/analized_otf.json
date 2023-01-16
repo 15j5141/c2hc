@@ -17,9 +17,14 @@
     "or": [
         {
             "name": ".TAU",
-            "start": 50,
-            "end": 159,
-            "diff": 109,
+            "events": [
+                {
+                    "name": "PAPI_L3_LDM",
+                    "start": 50,
+                    "end": 159,
+                    "diff": 109
+                }
+            ],
             "callStack": 0
         },
         {
@@ -41,14 +46,16 @@
             "start": 102,
             "end": 103,
             "diff": 1,
-            "callStack": 3, "//": "再帰"
+            "callStack": 3,
+            "//": "再帰"
         },
         {
             "name": "calc",
             "start": 104,
             "end": 105,
             "diff": 1,
-            "callStack": 2, "//": "通常"
+            "callStack": 2,
+            "//": "通常"
         }
     ]
 }
