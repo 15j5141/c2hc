@@ -1,17 +1,12 @@
-# ライブラリのインポート
 import numpy as np
 import pandas as pd
-import os
 import matplotlib
 import seaborn as sns
 from matplotlib import pyplot as plt
-
-# モデリング
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix
-import lightgbm as lgb
+from sklearn.metrics import accuracy_score, confusion_matrix, r2_score
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import r2_score  # モデル評価用(決定係数)
+import lightgbm as lgb
 
 # パラメータの準備
 params = {
@@ -25,40 +20,40 @@ params = {
 }
 model = lgb.LGBMRegressor(**params)
 
+# データの読み込み
 df_mc = pd.read_csv("out/mc_append.csv", header=None)
 df_hc = pd.read_csv("out/hc_append.csv", header=None)
 
-
+# 標準化
 scaler_hc = StandardScaler()
 scaler_mc = StandardScaler()
-
-
 scaler_hc.fit(df_hc)
 scaler_mc.fit(df_mc)
 df_hc = scaler_hc.transform(df_hc)
-X = scaler_mc.transform(df_mc)  # 説明変数（目的変数以外）
+X = scaler_mc.transform(df_mc)
 y = df_hc[:, 3]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-model.fit(
-    X_train,
-    y_train,
-    eval_set=[(X_train, y_train), (X_test, y_test)],
-    early_stopping_rounds=100,
-)
+# 学習と評価
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+model.fit(X_train, y_train, eval_set=[(X_train, y_train), (X_test, y_test)], early_stopping_rounds=100)
+
 print(model.best_iteration_)
 y_pred = model.predict(X_test)
 
 print(r2_score(y_test, y_pred))
+
+# 可視化
 fig = plt.figure()
 ax = fig.add_subplot()
 
 mean_mc, scale_mc = scaler_mc.mean_, scaler_mc.scale_
 mean_hc, scale_hc = scaler_hc.mean_, scaler_hc.scale_
+
 # y_pred*scale_hc + mean_hc
 ax.scatter(X_test[:, 50], y_pred, c=[(1, 0, 0)], label="prediction")
 for i in range(1, X_test.shape[0]):
     ax.scatter(X_test[:, i], y_pred, c=[(0.5 + (3 * i / 255), 0, 0)])
+
 ax.set_xlabel("mnemonic count")
 ax.set_ylabel("hardware count")
 ax.set_xlim(-1, 2)
