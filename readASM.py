@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import csv
 
 
 class ReadASM:
@@ -63,6 +64,11 @@ class ReadASM:
     def save(self, results):
         with open("out/results.json", "w") as f:
             json.dump(results, f, indent=4)
+
+    def saveCSV(self, results):
+        with open("out/results.csv", "a") as f:
+            writer = csv.writer(f)
+            writer.writerow(results)
 
 
 def main():
