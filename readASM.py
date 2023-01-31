@@ -36,6 +36,12 @@ class ReadASM:
                 # print("label" + s_line)
                 results.append(str.upper("__LABEL__"))
             elif matcher_nolabel.match(s_line):
+                # 強制高速化
+                if(True):
+                    tokens = s_line.strip().split()
+                    results.append(str.upper(tokens[0]))
+                    continue
+
                 # filter
                 # checked = [x for x in json_mnemonic if matcher_mnemonic_func(x).match(s_line)]
                 # checked2 = [x for x in json_section if matcher_mnemonic_func(x).match(s_line)]
@@ -69,6 +75,7 @@ class ReadASM:
         with open("out/results.csv", "a") as f:
             writer = csv.writer(f)
             writer.writerow(results)
+            print("save:results.csv")
 
 
 def main():

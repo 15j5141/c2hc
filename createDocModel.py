@@ -28,7 +28,7 @@ class CreateDocModel:
         documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(docs)]
         self.model = Doc2Vec(
             documents,
-            vector_size=10,
+            vector_size=1000,
             window=5,
             min_count=1,
             workers=4,
