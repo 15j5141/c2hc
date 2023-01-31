@@ -3,11 +3,13 @@ import json
 
 import open_otf2, readASM, SArray2vec
 
+
 class Manager:
     def __init__(self) -> None:
         with open("./records.json", "r") as f:
-            self.records:list = json.load(f)
+            self.records: list = json.load(f)
         pass
+
     def buildC(self, *args, **kwargs):
         HCList = [
             "PAPI_L1_DCM",
@@ -70,19 +72,28 @@ class Manager:
         self._init_hardwareCounter_json()
         i = 0
         my_env = os.environ.copy()
-        self.env=my_env
+        self.env = my_env
         for j in range(len(self.records)):
             my_env["COMPILE_FILE"] = "in/Project_CodeNet/" + self.records[j]["c"]
             my_env["INPUT_TEXT"] = self.records[j]["in"]
-            for i in range(len(HCList )// 4):
+            for i in range(len(HCList) // 4):
                 my_env["COUNTER2"] = HCList[4 * i + 0]
                 my_env["COUNTER3"] = HCList[4 * i + 1]
                 my_env["COUNTER4"] = HCList[4 * i + 2]
                 my_env["COUNTER5"] = HCList[4 * i + 3]
                 # my_env["COMPILE_FILE"] = "./main.c"
                 # my_env["INPUT_TEXT"] = "10"
-                print(my_env["COMPILE_FILE"]+":"+my_env["INPUT_TEXT"])
-                print(""+str(i)+"/"+str(len(HCList)//4)+","+str(j)+"/"+str(len(self.records)))
+                print(my_env["COMPILE_FILE"] + ":" + my_env["INPUT_TEXT"])
+                print(
+                    ""
+                    + str(i)
+                    + "/"
+                    + str(len(HCList) // 4)
+                    + ","
+                    + str(j)
+                    + "/"
+                    + str(len(self.records))
+                )
                 self._called_build()
 
                 try:
@@ -104,10 +115,8 @@ class Manager:
                     asmReader.save(asmReader.parse())
                     asm2vector.save(asm2vector.toVector().tolist())
 
-
-
     def _called_build(self, *args, **kwargs):
-        """ called_build.sh(open_otf2.py)を呼ぶ. """
+        """called_build.sh(open_otf2.py)を呼ぶ."""
         process = subprocess.Popen(
             ["sh", "./called_build.sh"],
             # stdout=subprocess.PIPE,
@@ -115,21 +124,21 @@ class Manager:
             encoding="utf-8",
         )
         # process = subprocess.Popen(["cmd", "/c", "echo", "%MSG%"], stdout=subprocess.PIPE, env=my_env, encoding="sjis")
-        stdoutdata, _ = process.communicate(
-            input=None, timeout=None
-        )
+        stdoutdata, _ = process.communicate(input=None, timeout=None)
 
         print(stdoutdata)
-        print("returncode:"+(str)(process.returncode))
+        print("returncode:" + (str)(process.returncode))
 
     def _init_hardwareCounter_json(self):
-        """ hardwareCounter.jsonを初期化する. """
+        """hardwareCounter.jsonを初期化する."""
         with open("out/hardwareCounter.json", "w") as f:
             json.dump([], f, indent=2)
-        with open('out/hc_append.csv', 'w') as f:
-            f.write('')
-        with open('out/mc_append.csv', 'w') as f:
-            f.write('')
+        with open("out/hc_append.csv", "w") as f:
+            f.write("")
+        with open("out/mc_append.csv", "w") as f:
+            f.write("")
+        with open("out/results.csv", "w") as f:
+            f.write("")
 
 
 if __name__ == "__main__":
