@@ -5,9 +5,18 @@ import json
 class CreateDocModel:
     def __init__(self):
         self.pathModel = "./in/doc2vec.model"
-        self.model = Doc2Vec([], vector_size=2, window=5, min_count=1, workers=4)
-        with open("./records.json", "r") as f:
-            self.records: list = json.load(f)
+        self.model = Doc2Vec(
+            [TaggedDocument(doc, [i]) for i, doc in enumerate([["RET"]])],
+            vector_size=2,
+            window=5,
+            min_count=1,
+            workers=4,
+        )
+        with open("./out/results.csv", "r") as f:
+            self.lines = []
+            lines = f.readlines()
+            for line in lines:
+                self.lines.append(line.split(","))
 
     def load(self):
         self.model = Doc2Vec.load(self.pathModel)
@@ -17,9 +26,22 @@ class CreateDocModel:
 
     def fitAll(self, docs=[[]]):
         documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(docs)]
-        self.model = Doc2Vec(documents, vector_size=2, window=5, min_count=1, workers=4)
+        self.model = Doc2Vec(
+            documents,
+            vector_size=10,
+            window=5,
+            min_count=1,
+            workers=4,
+            dm=0,
+            epochs=100,
+        )
 
-    def fitRecords(self):
-        for j in range(len(self.records)):
-            COMPILE_FILE = "in/Project_CodeNet/" + self.records[j]["c"]
-            INPUT_TEXT = self.records[j]["in"]
+    def fitResults(self):
+        self.fitAll(self.lines)
+
+
+if __name__ == "__main__":
+    models = CreateDocModel()
+    models.fitResults()
+    models.save()
+    print(models.model.infer_vector(["RET"]))
