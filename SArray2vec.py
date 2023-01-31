@@ -10,6 +10,7 @@ import numpy as np
 
 # import seaborn as sns
 from sklearn.preprocessing import OneHotEncoder
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 
 # import readASM
 
@@ -31,6 +32,7 @@ class SArray2Vec:
         self.mnemonic_section_list = json_section + json_mnemonic
         with open(path) as f:
             self.lines = json.load(f)
+        self.doc2vecModel = Doc2Vec.load("in/doc2vec.model")
 
     def toVector(self):
         OneHot = OneHotEncoder(sparse=False, dtype=int)
@@ -41,14 +43,21 @@ class SArray2Vec:
         # print(vector2)
         return vector2
 
+    def toVector2(self):
+        # [["ADD", "RET"]] -> TaggedDocument
+        model = self.doc2vecModel
+        vector = model.infer_vector(self.lines)
+        vector2 = vector
+        print(vector2)
+        return vector2
+
     def save(self, results):
         # with open("out/results_onehot.json", "w") as f:
         with open("out/mnemonicCounter.json", "w") as f:
             json.dump(results, f, indent=4)
-        with open('out/mc_append.csv', 'a') as f:
+        with open("out/mc_append.csv", "a") as f:
             writer = csv.writer(f)
             writer.writerow(results)
-
 
 
 def main():
