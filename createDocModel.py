@@ -32,7 +32,7 @@ class CreateDocModel:
             window=5,
             min_count=1,
             workers=4,
-            dm=0,
+            dm=1,
             epochs=100,
         )
 

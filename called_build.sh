@@ -20,6 +20,7 @@ build()
 {
     cp -f $COMPILE_FILE ./main.c
     gcc main.c -S -fno-asynchronous-unwind-tables -o ./main.s
+    cp ./main.s ./in/main.s
     taucc main.c -tau:pdtinst -tau:serial,papi,pdt -tau:compinst -tau:headerinst -o ./a.out
     echo -e "$INPUT_TEXT" | ./a.out
 
@@ -29,11 +30,16 @@ build()
     tau_trace2json ./tautrace.0.0.0.trc ./events.0.edf -chrome -ignoreatomic -o trace.json
     tau2otf2 ./tautrace.0.0.0.trc ./events.0.edf main.otf2
     # tau2profile ./tautrace.0.0.0.trc ./events.0.edf -d ./
-    cp ./main.s ./in/main.s
     #-ignoreatomic
     # tail -n 10 main.dump
 }
 
+build_model()
+{
+    cp -f $COMPILE_FILE ./main.c
+    gcc main.c -S -fno-asynchronous-unwind-tables -o ./main.s
+    cp ./main.s ./in/main.s
+}
 
 build
 #GET_TIME_OF_DAY

@@ -113,7 +113,9 @@ class Manager:
                     # all save
                     otfReader.save()
                     asmReader.save(asmReader.parse())
-                    asm2vector.save(asm2vector.toVector().tolist())
+                    asm2vector.save(asm2vector.toVector2().tolist())
+                    # only asm csv save
+                    # asmReader.saveCSV(asmReader.parse())
 
     def _called_build(self, *args, **kwargs):
         """called_build.sh(open_otf2.py)を呼ぶ."""
@@ -137,8 +139,9 @@ class Manager:
             f.write("")
         with open("out/mc_append.csv", "w") as f:
             f.write("")
-        with open("out/results.csv", "w") as f:
-            f.write("")
+        # only asm csv save
+        # with open("out/results.csv", "w") as f:
+        #     f.write("")
 
 
 if __name__ == "__main__":

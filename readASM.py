@@ -37,9 +37,13 @@ class ReadASM:
                 results.append(str.upper("__LABEL__"))
             elif matcher_nolabel.match(s_line):
                 # 強制高速化
-                if(True):
+                if(False):
                     tokens = s_line.strip().split()
                     results.append(str.upper(tokens[0]))
+                    continue
+                if(True):
+                    tokens = re.findall(r'\b\w+\b|[^\s\w]', s_line)
+                    results = results + tokens + ["__BR__"]
                     continue
 
                 # filter

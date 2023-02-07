@@ -48,7 +48,7 @@ class SArray2Vec:
         model = self.doc2vecModel
         vector = model.infer_vector(self.lines)
         vector2 = vector
-        print(vector2)
+        # print(vector2)
         return vector2
 
     def save(self, results):
