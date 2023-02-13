@@ -96,26 +96,37 @@ class Manager:
                 )
                 self._called_build()
 
-                try:
-                    # otf
-                    otfReader = open_otf2.OpenOTF2()
-                    otfReader.load()
-                    # asm
-                    asmReader = readASM.ReadASM()
-                    asmReader.load()
-                    # vec
-                    asm2vector = SArray2vec.SArray2Vec()
-                    asm2vector.load()
-                except:
-                    # 例外を無視する.
-                    print("Exception...")
+                if(True):
+                    try:
+                        # otf
+                        otfReader = open_otf2.OpenOTF2()
+                        otfReader.load()
+                        # asm
+                        asmReader = readASM.ReadASM()
+                        asmReader.load()
+                        # vec
+                        asm2vector = SArray2vec.SArray2Vec()
+                        asm2vector.load()
+                    except:
+                        # 例外を無視する.
+                        print("Exception...")
+                    else:
+                        # all save
+                        otfReader.save()
+                        asmReader.save(asmReader.parse())
+                        asm2vector.save(asm2vector.toVector2().tolist())
                 else:
-                    # all save
-                    otfReader.save()
-                    asmReader.save(asmReader.parse())
-                    asm2vector.save(asm2vector.toVector2().tolist())
-                    # only asm csv save
-                    # asmReader.saveCSV(asmReader.parse())
+                    try:
+                        # asm
+                        asmReader = readASM.ReadASM()
+                        asmReader.load()
+                    except:
+                        # 例外を無視する.
+                        print("Exception...")
+                    else:
+                        # only asm csv save
+                        asmReader.saveCSV(asmReader.parse())
+
 
     def _called_build(self, *args, **kwargs):
         """called_build.sh(open_otf2.py)を呼ぶ."""

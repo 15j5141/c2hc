@@ -1,62 +1,31 @@
 [
   {
-    "name": "int calc(int) C",
+    "name": "addr=<0x4261d6>",
     "callStack": 0,
     "events": [
       {
-        "name": "PAPI_L3_TCR",
-        "start": 4579,
-        "end": 4617,
-        "diff": 38
+        "name": "PAPI_L1_DCM",
+        "start": 3709,
+        "end": 4240,
+        "diff": 531
       },
       {
-        "name": "PAPI_L2_TCW",
-        "start": 528,
-        "end": 544,
-        "diff": 16
+        "name": "PAPI_L1_ICM",
+        "start": 8181,
+        "end": 9995,
+        "diff": 1814
       },
       {
-        "name": "PAPI_L3_TCW",
-        "start": 292,
-        "end": 295,
-        "diff": 3
+        "name": "PAPI_L2_DCM",
+        "start": 2054,
+        "end": 2241,
+        "diff": 187
       },
       {
-        "name": "PAPI_REF_CYC",
-        "start": 300142,
-        "end": 303552,
-        "diff": 3410
-      }
-    ],
-    "state": "Leave"
-  },
-  {
-    "name": "int main(void) C",
-    "callStack": 0,
-    "events": [
-      {
-        "name": "PAPI_L3_TCR",
-        "start": 4565,
-        "end": 4850,
-        "diff": 285
-      },
-      {
-        "name": "PAPI_L2_TCW",
-        "start": 516,
-        "end": 552,
-        "diff": 36
-      },
-      {
-        "name": "PAPI_L3_TCW",
-        "start": 287,
-        "end": 298,
-        "diff": 11
-      },
-      {
-        "name": "PAPI_REF_CYC",
-        "start": 294221,
-        "end": 314247,
-        "diff": 20026
+        "name": "PAPI_L2_ICM",
+        "start": 4658,
+        "end": 5193,
+        "diff": 535
       }
     ],
     "state": "Leave"
@@ -66,28 +35,28 @@
     "callStack": 0,
     "events": [
       {
-        "name": "PAPI_L3_TCR",
-        "start": 4193,
+        "name": "PAPI_L1_DCM",
+        "start": 2969,
         "end": 0,
-        "diff": -4193
+        "diff": -2969
       },
       {
-        "name": "PAPI_L2_TCW",
-        "start": 486,
+        "name": "PAPI_L1_ICM",
+        "start": 6278,
         "end": 0,
-        "diff": -486
+        "diff": -6278
       },
       {
-        "name": "PAPI_L3_TCW",
-        "start": 269,
+        "name": "PAPI_L2_DCM",
+        "start": 1704,
         "end": 0,
-        "diff": -269
+        "diff": -1704
       },
       {
-        "name": "PAPI_REF_CYC",
-        "start": 274195,
+        "name": "PAPI_L2_ICM",
+        "start": 3616,
         "end": 0,
-        "diff": -274195
+        "diff": -3616
       }
     ],
     "state": "Leave"
