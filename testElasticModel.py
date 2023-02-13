@@ -63,11 +63,11 @@ for i in range(0, 4):
     # モデル学習
     model.fit(X_train, y_train)
 
-    print("score(" + str(i) + ")=" + str(model.score(X_test, y_test)))
+    # print("score(" + str(i) + ")=" + str(model.score(X_test, y_test)))
     y_pred = model.predict(X_test)
     y_pred_list.append(y_pred)
     y_test_list.append(y_test)
-    print("score=" + str(r2_score(y_test, y_pred)))
+    print("score(" + str(i) + ")=" + str(r2_score(y_test, y_pred)))
     # pred_SVR = model.score(x_test, )
 
 # fig = plt.figure(figsize=(8, 6))

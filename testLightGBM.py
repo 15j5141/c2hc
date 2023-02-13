@@ -87,7 +87,7 @@ ax.bar(
     label="error")
 # for i in range(0, X_test.shape[0]):
 #     ax.scatter(X_test[:, i], y_test, c=[(0, 0, 0.5 + (3 * i / 255))])
-print(X_test[:, 50])
+# print(X_test[:, 50])
 ax.legend()
 fig.show()
 plt.show()

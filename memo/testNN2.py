@@ -6,12 +6,13 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
+from sklearn.metrics import accuracy_score, confusion_matrix, r2_score, mean_squared_error
 
 class Net(torch.nn.Module):
 
   def __init__(self):
     super(Net, self).__init__()
-    self.fc1 = torch.nn.Linear(1066, 64)
+    self.fc1 = torch.nn.Linear(1000, 64)
     self.fc2 = torch.nn.Linear(64, 32)
     self.fc3 = torch.nn.Linear(32, 1)
 
@@ -83,9 +84,26 @@ ax = fig.add_subplot()
 print(X_train.shape)
 print(y_test.shape)
 print(y_train.shape)
-ax.plot(X_test, y_pred, c='orange')
-ax.scatter(X_train[:,5], y_train)
-ax.set_xlabel('x')
-ax.set_ylabel('y')
+# ax.plot(X_test, y_pred, c='orange')
+# ax.scatter(X_train[:,5], y_train)
+# ax.set_xlabel('x')
+# ax.set_ylabel('y')
+width=0.35
+
+mean_mc, scale_mc = scaler_mc.mean_, scaler_mc.scale_
+mean_hc, scale_hc = scaler_hc.mean_, scaler_hc.scale_
+unscaled_hc_pred = (y_pred * scale_hc[3] + mean_hc[3])
+unscaled_hc_acc = (y_test * scale_hc[3] + mean_hc[3])
+print(r2_score(y_test, y_pred))
+ax.bar(
+    [(i) for i in range(1, len(y_test) + 1)],
+    np.abs(unscaled_hc_acc - unscaled_hc_pred),
+    width=width,
+    color=[(1, 0, 0)], 
+    label="error")
+
+
+
 fig.show()
 plt.show()
+
