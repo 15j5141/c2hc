@@ -1,0 +1,8 @@
+manager.py
+	L154: results.csvクリアにする
+	L99: False
+called_build.sh
+	buildをbuild_modelに書き換える
+pythonで実行
+	manager.py
+	createDocModel.py

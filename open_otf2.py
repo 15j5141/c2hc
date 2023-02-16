@@ -94,8 +94,8 @@ class OpenOTF2:
                     # print("Leave {},{}".format(event.region, event.attributes))
     def save(self):
         # print(json.dumps(stack_done))
-        with open("out/hardwareCounter.json", "w") as f:
-            json.dump(self.stack_done, f, indent=2)
+        # with open("out/hardwareCounter.json", "w") as f:
+        #     json.dump(self.stack_done, f, indent=2)
 
         # row = [x["diff"] for x in self.stack_done[0]["events"] ]
         row = [x["diff"] for x in self.stack_done[len(self.stack_done)-2]["events"] ]

@@ -53,8 +53,8 @@ class SArray2Vec:
 
     def save(self, results):
         # with open("out/results_onehot.json", "w") as f:
-        with open("out/mnemonicCounter.json", "w") as f:
-            json.dump(results, f, indent=4)
+        # with open("out/mnemonicCounter.json", "w") as f:
+        #     json.dump(results, f, indent=4)
         with open("out/mc_append.csv", "a") as f:
             writer = csv.writer(f)
             writer.writerow(results)
@@ -63,7 +63,7 @@ class SArray2Vec:
 def main():
     sArray2Vec = SArray2Vec()
     sArray2Vec.load()
-    vector = sArray2Vec.toVector()
+    vector = sArray2Vec.toVector2()
     sArray2Vec.save(vector.tolist())
 
 

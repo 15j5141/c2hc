@@ -9,8 +9,8 @@ rm -r MULTI__*/
 export TAU_TRACE=1
 # export TAU_PROFILE=1
 export COUNTER1=P_WALL_CLOCK_TIME
-# export COMPILE_FILE="./main.c"
-# export INPUT_TEXT="10"
+# export COMPILE_FILE="./in/Project_CodeNet/data/p00006/C/s004547159.c"
+# export INPUT_TEXT="w32nimda\n"
 
 # before exec python
 mkdir -p dst
